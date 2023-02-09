@@ -9,18 +9,22 @@ counter = 6
 print("_ _ _ _ _")
 
 while counter > 0:
-    counter -= 1
 
     player = input("Guess a word: ")
 
-    if player == word:
-        "You win !"
+    if len(player) != 5:
+        print("Please enter a 5 letter word")
+    elif player == word:
+        print("You win !")
         break
     else:
-        for char in word:
-            if char in player and word.index(char) == player.index(char):
-                prGreen(char)
-            elif char in player:
-                prYellow(char)
+        counter -= 1
+        for pChar, wChar in zip(player, word):
+            if pChar == wChar: #char in word and word.index(char, ) == player.index(char):
+                prGreen(pChar)
+            elif pChar in word:
+                prYellow(pChar)
             else:
-                print("_", end = " ")
+                print(pChar, end = " ")
+        print("")
+        print("Number of guesses left:", counter)
